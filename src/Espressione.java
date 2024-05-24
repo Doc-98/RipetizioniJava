@@ -10,7 +10,7 @@ public class Espressione {
 	private int contaParentesi = 0; //conta parentesi
 
 	// Costruttore
-	public Espressione( String expression) {
+	public Espressione(String expression) {
 
 		// Creiamo una stringa che ci permette di controllare che l'espressione da valutare sia valida.
 		String EXPR = "(\\d+|[\\+\\-\\*/\\(\\)])+"; //SOLO CN
@@ -18,7 +18,7 @@ public class Espressione {
 		// Confrontiamo l'argomento del costruttore con la stringa EXPR che abbiamo appena creato con il metodo ".matches".
 		// Essenzialmente con EXPR stiamo definendo una generica stringa che inizia con un numero seguito da un operatore fra quelli definiti.
 		// Quindi entriamo nell'if se "expression" non è di questa forma.
-		if( !expression.matches(EXPR) )
+		if(!expression.matches(EXPR))
 			throw new RuntimeException(expression + " malformata 1.");
 
 		// Se il controllo è andato a buon fine, possiamo salvare l'argomento nella variabile dell'oggetto.
@@ -48,6 +48,18 @@ public class Espressione {
 		return risultato;
 	}//valuta
 
+	// Prende un char che definisce l'operazione e due interi, ritorna l'intero risultato dell'operazione rilevata.
+	private int calcoloAtomico(char operatore, int operando1, int operando2) {
+        return switch (operatore) {
+            case '+' -> operando1 + operando2;
+            case '-' -> operando1 - operando2;
+            case '*' -> operando1 * operando2;
+            case '/' -> operando1 / operando2;
+            default -> throw new RuntimeException(expression + " malformata 3.");
+        };
+	}
+
+
 	// Metodo a cui passiamo uno stack di operandi e uno di operatori e che ci ritorna il risultato dell'applicazione ordinata di entrambi.
 	// N.B.: Non tiene conto delle parentesi!
 	private int applicaOperatori( Stack<Integer> stackOperandi, Stack<Character> stackOperatori ) {
@@ -67,20 +79,10 @@ public class Espressione {
 				System.out.println(expression + " malformata 2.");
 				System.exit(-1);
 			}
-
-			// Creiamo uno switch case che effettui l'operazione corrispondente fra gli operandi in base all'operatore che si trova nel nostro cursore.
-			// Anche qui gestiamo una possibile eccezione creando un default case (quello eseguito nel caso nessuno dei precedenti viene eseguito) con un lancio di eccezione.
-			// N.B.: I "break" sono riferiti allo switch case, non al ciclo while.
-			switch(cursoreOperatori) {
-				case '+': stackOperandi.push(operando1 + operando2); break;
-				case '-': stackOperandi.push(operando1 - operando2); break;
-				case '*': stackOperandi.push(operando1 * operando2); break;
-				case '/': stackOperandi.push(operando1 / operando2); break;
-				default: throw new RuntimeException(expression + " malformata 3.");
-			}
+			stackOperandi.push(calcoloAtomico(cursoreOperatori, operando1, operando2));
 		}
 
-		// A questo punto controlliamo di aver eseguito tutti gli operatori meno che al massimo uno.
+		// A questo punto controlliamo di aver eseguito tutti gli operandi meno che al massimo uno.
 		// Ovvero nello stack operandi dovremmo avere soltanto un numero, il nostro risultato.
 		// Se abbiamo finito gli operatori (ovvero siamo usciti dal ciclo) ma abbiamo più di un numero sullo stack degli operandi, vuol dire che c'è un problema.
 		if(stackOperandi.size() > 1)
@@ -91,18 +93,18 @@ public class Espressione {
 		return stackOperandi.pop();
 	}//applicaOperatori
 
-	// Creiamo un comparatore di caratteri che prende due caratteri come input e ritorna 0 se non sono operatori fra quelli definiti.
+	// Creiamo un comparatore di caratteri che prende due caratteri come input e ritorna 0 se non sono operatori fra quelli definiti o se hanno la stessa priorità.
 	// Altrimenti ritorna -1 se il secondo operatore ha la precedenza sul primo, viceversa ritorna 1.
 	Comparator<Character> comparatoreOperandi =
 		(primoOp, secondoOp)-> {
-			if(("" + primoOp).matches("[\\+\\-]") && ("" + secondoOp).matches("[\\*/]")) return -1;
+			if( ("" + primoOp).matches("[\\+\\-]") && ("" + secondoOp).matches("[\\*/]") ) return -1;
 
-			if(("" + primoOp).matches("[\\*/]") && ("" + secondoOp).matches("[\\+\\-]")) return 1;
+			if( ("" + primoOp).matches("[\\*/]") && ("" + secondoOp).matches("[\\+\\-]") ) return 1;
 
 			return 0;
 		};
 
-	// Metodo ricorsivo a cui viene passata una stringa token e che ritorna il suo risultato come intero.
+	// Metodo ricorsivo a cui viene passata una stringa token e che ritorna il risultato dell'espressione contenuta come intero.
 	private int valutaEspressione(StringTokenizer stringaToken) {
 
 		// Creiamo i nostri due stack.
@@ -114,7 +116,7 @@ public class Espressione {
 
 			// Creiamo una stringa cursore nella quale salveremo ad ogni istanza del ciclo il token seguente.
 			// N.B.: il metodo ".nextToken" fa scorrere il riferimento salvato nell'oggetto al quale viene applicato.
-			// Questo vuol dire che ogni volta che lo usiamo, in "stringaToken" contiene una sotto-stringa sempre più piccola.
+			// Questo vuol dire che ogni volta che lo usiamo, "stringaToken" contiene una sotto-stringa sempre più piccola.
 			// Essenzialmente ogni volta che "usiamo" un token, lo consumiamo.
 			String cursoreToken = stringaToken.nextToken();
 
@@ -138,8 +140,7 @@ public class Espressione {
 			}
 			else {
 
-				// Ci creiamo una variabile per tenere traccia dell'operatore che stiamo guardando nella stringa token.
-				// N.B.: ".charAt()" non consuma un token ma ci fa solo guardare. (Simile al metodo "peek" che vedremo fra poco)
+				// Ci creiamo una variabile per tenere traccia dell'operatore che stiamo guardando con il cursore.
 				char operatoreCorrente = cursoreToken.charAt(0);
 
 				// Lo stack operatori è vuoto --OR-- l'operatore corrente ha la precedenza sul primo elemento dello stack operatori.
@@ -154,12 +155,10 @@ public class Espressione {
 						int operandoTemp2 = stackOperandi.pop(), operandoTemp1 = stackOperandi.pop();
 
 						// Switch case come prima.
-						switch(operatoreTemp) {
-							case '+': stackOperandi.push(operandoTemp1 + operandoTemp2); break;
-							case '-': stackOperandi.push(operandoTemp1 - operandoTemp2); break;
-							case '*': stackOperandi.push(operandoTemp1 * operandoTemp2); break;
-							case '/': stackOperandi.push(operandoTemp1 / operandoTemp2); break;
-							default: throw new RuntimeException(expression + " malformata 5.");
+						try {
+							stackOperandi.push(calcoloAtomico(operatoreTemp, operandoTemp1, operandoTemp2));
+						} catch(RuntimeException e) {
+							System.out.println(expression + " malformata 5.");
 						}
 					}
 					// Una volta che usciamo vuol dire che una delle due condizioni del while non è più rispettata.
@@ -171,7 +170,7 @@ public class Espressione {
 		}
 		// Qui abbiamo finito il while che scorreva tutti i token della stringa.
 		// Ovvero abbiamo considerato tutta l'espressione.
-		// Dobbiamo ricordarci che possiamo rimanere con delle ultime operazioni da effettuare negli stack.
+		// Dobbiamo ricordarci che rimarremo con delle ultime operazioni da effettuare negli stack.
 		// Facciamo un'ultima chiamata ad "applicaOperatori" per concludere.
 		return applicaOperatori(stackOperandi, stackOperatori);
 	}//valutaEspressione
