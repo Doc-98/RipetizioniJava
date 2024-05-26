@@ -50,13 +50,13 @@ public class Espressione {
 
 	// Prende un char che definisce l'operazione e due interi, ritorna l'intero risultato dell'operazione rilevata.
 	private int calcoloAtomico(char operatore, int operando1, int operando2) {
-        return switch (operatore) {
-            case '+' -> operando1 + operando2;
-            case '-' -> operando1 - operando2;
-            case '*' -> operando1 * operando2;
-            case '/' -> operando1 / operando2;
-            default -> throw new RuntimeException(expression + " malformata 3.");
-        };
+		return switch (operatore) {
+			case '+' -> operando1 + operando2;
+			case '-' -> operando1 - operando2;
+			case '*' -> operando1 * operando2;
+			case '/' -> operando1 / operando2;
+			default -> throw new RuntimeException(expression + " malformata 3.");
+		};
 	}
 
 
