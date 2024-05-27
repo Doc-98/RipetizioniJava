@@ -35,12 +35,12 @@ public class Main {
         Transizione transizione5 = new Transizione("t5", Arrays.asList(new ArcoIn(posto4)), Arrays.asList(new ArcoOut(posto1)));
 
         // Mettiamo tutte le transizioni in una lista.
-        LinkedList<Transizione> listaTransizioni = new LinkedList<>(java.util.Arrays.asList(transizione1, transizione2, transizione3, transizione4, transizione5));
+        LinkedList<Transizione> listaTransizioni = new LinkedList<>(Arrays.asList(transizione1, transizione2, transizione3, transizione4, transizione5));
 
         // Stampiamo lo stato iniziale.
         System.out.println("Marcatura iniziale:");
         for (String s : mappaPosti.keySet())
-            System.out.println(mappaPosti.get(s) + " ");
+            System.out.println(mappaPosti.get(s));
         System.out.println();
 
         // Inizializiamo il network e facciamolo sviluppare per 5 passi.

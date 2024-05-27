@@ -12,12 +12,12 @@ public abstract class Entita {
 
     // GETTER
     public String getNome() {
-        return nome;
+        return this.nome;
     }
 
     // TO STRING
     public String toString() {
-        return nome;
+        return this.nome;
     }
 
     // EQUALS

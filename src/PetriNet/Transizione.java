@@ -17,8 +17,8 @@ public class Transizione extends Entita {
 
     // Ritorna true se tutti i suoi archi entranti sono abilitati, altrimenti false.
     public boolean abilitata() {
-        for (ArcoIn ai : preSet)
-            if (!ai.abilitato()) return false;
+        for (ArcoIn arcoEntrante : preSet)
+            if (!arcoEntrante.abilitato()) return false;
         return true;
     }//abilitata
 
@@ -26,15 +26,15 @@ public class Transizione extends Entita {
     public void sparo() {
 
         // Rimuove i token necessari per effettuaer la transizione dai posti di partenza.
-        for (ArcoIn ai : preSet) {
-            Posto p = ai.getPosto();
-            p.setMarcatura(p.getMarcatura() - ai.getPeso());
+        for (ArcoIn arcoEntrante : preSet) {
+            Posto postoTemp = arcoEntrante.getPosto();
+            postoTemp.setMarcatura(postoTemp.getMarcatura() - arcoEntrante.getPeso());
         }
 
         // Aggiunge i token appropriati nei posti di arrivo.
-        for (ArcoOut au : postSet) {
-            Posto p = au.getPosto();
-            p.setMarcatura(p.getMarcatura() + au.getPeso());
+        for (ArcoOut arcoUscente : postSet) {
+            Posto postoTemp = arcoUscente.getPosto();
+            postoTemp.setMarcatura(postoTemp.getMarcatura() + arcoUscente.getPeso());
         }
     }//sparo
 
@@ -44,13 +44,13 @@ public class Transizione extends Entita {
 
         String s = super.toString() + " preset =";
 
-        for (ArcoIn ai : preSet)
-            s = s + ai.getPosto().getNome() + " peso #" + ai.getPeso() + " ";
+        for (ArcoIn arcoEntrante : preSet)
+            s = s + arcoEntrante.getPosto().getNome() + " peso #" + arcoEntrante.getPeso() + " ";
 
         s = s + " postset =";
 
-        for (ArcoOut au : postSet)
-            s = s + au.getPosto().getNome() + " peso #" + au.getPeso() + " ";
+        for (ArcoOut arcoUscente : postSet)
+            s = s + arcoUscente.getPosto().getNome() + " peso #" + arcoUscente.getPeso() + " ";
         s = s + "\n";
 
         return s;

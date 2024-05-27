@@ -30,6 +30,6 @@ public abstract class Arco {
 
     // TO STRING
     public String toString() {
-        return "Arco peso:" + peso;
+        return "Arco peso: " + peso;
     }
 }

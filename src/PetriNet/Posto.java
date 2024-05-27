@@ -17,9 +17,9 @@ public class Posto extends Entita {
         this(nome, 0);
     }
 
-    // Costruttore secondario ???
+    // Costruttore di copia
     public Posto(Posto p) {
-        this(p.getNome(), p.marcatura);
+        this(p.getNome(), p.getMarcatura());
     }
 
     // GETTER
@@ -35,6 +35,6 @@ public class Posto extends Entita {
 
     // TO STRING
     public String toString() {
-        return super.toString() + "#" + marcatura;
+        return super.toString() + "#" + this.marcatura;
     }
 }

@@ -9,12 +9,12 @@ public class ArcoIn extends Arco {
 
     // Costruttore secondario (peso default)
     public ArcoIn(Posto p) {
-        this(p, 1);
+        super(p);
     }
 
     // TO STRING
     public String toString() {
-        return super.toString() + " di ingresso";
+        return super.toString() + " di ingresso dal posto " + this.getPosto().getNome();
     }
 
     // Ritorna un true se il posto è abilitato, falso altrimenti.

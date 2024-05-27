@@ -9,11 +9,11 @@ public class ArcoOut extends Arco {
 
     // Costruttore secondario (peso default)
     public ArcoOut(Posto p) {
-        this(p, 1);
+        super(p);
     }
 
     // TO STRING
     public String toString() {
-        return super.toString() + " di uscita";
+        return super.toString() + " di uscita verso il posto " + this.getPosto().getNome();
     }
 }
