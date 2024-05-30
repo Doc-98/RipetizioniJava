@@ -11,88 +11,127 @@ import java.util.TreeSet;
 
 public class RiferimentiIncrociati {
 
+    // Struttura dati in forma di TreeMap con comparatore integrato.
+    // Usando la keyword "static" rendiamo questo attributo unico e condiviso da ogni istanza di questa classe.
     static TreeMap<String, TreeSet<Integer>> indice =
             new TreeMap<>(
                     (String s1, String s2) -> {
                         if (s1.length() < s2.length()) return -1;
                         if (s1.length() > s2.length()) return 1;
-                        return s1.compareTo(s2);
+                        return s1.compareTo(s2); // Usiamo un metodo delle stringhe di java per comparare in maniera lessigrafica.
                     }
             );
 
+    // Prende un file in input e ritorna true se la formattazione di ogni linea di testo del file è come segue:
+    // "parola":"numero"
+    // Ritorna falso altrimenti.
     static boolean verificaFile(File f) throws IOException {
         String regex = "\\w+:\\d+";
-        BufferedReader br = new BufferedReader(new FileReader(f));
+        BufferedReader reader = new BufferedReader(new FileReader(f));
         String linea = null;
         try {
-            for (; ; ) {
-                linea = br.readLine();
+            for ( ; ; ) {
+                linea = reader.readLine();
                 if (linea == null) break;
                 if (!linea.matches(regex)) return false;
             }
         } finally {
-            br.close();
+            reader.close();
         }
         return true;
     }//verificaFile
 
+    // Riceve un file come input, lo legge e riempie la struttura dati "indice" con tutte le informazioni all'interno del file.
     static void caricaFile(File f) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader(f));
-        String linea = null;
-        StringTokenizer st = null;
-        for (; ; ) {
-            linea = br.readLine();
-            if (linea == null) break;
-            st = new StringTokenizer(linea, ":");
-            String p = st.nextToken();
-            int l = Integer.parseInt(st.nextToken());
-            if (!indice.containsKey(p)) {
-                indice.put(p, new TreeSet<>());
+
+        // Istanziamo delle variabili dove salvare le informazioni da analizzare
+        BufferedReader reader = new BufferedReader(new FileReader(f));
+        String cursoreLinea = null;
+        StringTokenizer stringTokenizer = null;
+
+        // Scorriamo il file fino alla fine.
+        for ( ; ; ) {
+
+            cursoreLinea = reader.readLine();
+
+            // Creiamo la nostra condizione di uscita
+            if (cursoreLinea == null) break;
+
+            // Creiamo il tokenizer passandogli il delimitatore che ci interessa.
+            // Siccome non vogliamo contare il delimitatore, non attiviamo il flag finale.
+            stringTokenizer = new StringTokenizer(cursoreLinea, ":");
+
+            // Salviamo la parola e il numero contenuti nella linea in due variabili.
+            String parolaTemp = stringTokenizer.nextToken();
+            int numeroTemp = Integer.parseInt(stringTokenizer.nextToken());
+
+            // Se la parola non è già nella struttura dati, la aggiungiamo.
+            if (!indice.containsKey(parolaTemp)) {
+                indice.put(parolaTemp, new TreeSet<>());
             }
-            indice.get(p).add(l);
+            // Aggiungiamo il numero al set associato alla parola corrispondente. Non dobbiamo preoccuparci di duplicati essendo un set.
+            indice.get(parolaTemp).add(numeroTemp);
         }
-        br.close();
+        reader.close();
     }
 
-    static void visualizzaIndice() {
-        for (String p : indice.keySet()) {
-            System.out.println(p);
+    // Stampa la nostra struttura dati in console.
+    static void stampaIndice() {
+        for (String cursoreParola : indice.keySet()) {
+            System.out.println(cursoreParola);
             System.out.print("\t");
-            for (int n : indice.get(p))
-                System.out.print(n + " ");
+            for (int cursoreNumero : indice.get(cursoreParola))
+                System.out.print(cursoreNumero + " ");
             System.out.println();
         }
     }
 
+    // Prendi un file in input e ci scrive dentro la nostra struttura dati.
     static void scriviIndice(File fo) throws IOException {
-        PrintWriter pw = new PrintWriter(new FileWriter(fo));
-        for (String p : indice.keySet()) {
-            pw.println(p);
-            pw.print("\t");
-            for (int n : indice.get(p))
-                pw.print(n + " ");
-            pw.println();
+        PrintWriter printWriter = new PrintWriter(new FileWriter(fo));
+        for (String cursoreParola : indice.keySet()) {
+            printWriter.println(cursoreParola);
+            printWriter.print("\t");
+            for (int n : indice.get(cursoreParola))
+                printWriter.print(n + " ");
+            printWriter.println();
         }
-        pw.close();
+        printWriter.close();
     }
 
     public static void main(String[] args) throws IOException {
-        Scanner sc = new Scanner(System.in);
-        File fi = null, fo = null;
-        String nomeFi = null, nomeFo = null;
+
+        // Creiamo uno scanner.
+        Scanner scanner = new Scanner(System.in);
+
+        // Creiamo le nostre variabili.
+        File fileInput = null, fileOutput = null;
+        String nomeFInput = null, nomeFOutput = null;
+
+        // Prendiamo il nome del file input, lo salviamo e lo apriamo.
         System.out.print("Nome file di ingresso: ");
-        nomeFi = sc.nextLine();
-        fi = new File(nomeFi);
-        if (!fi.exists())
+        nomeFInput = scanner.nextLine();
+        fileInput = new File(nomeFInput);
+
+        // Gestiamo le eccezioni.
+        if (!fileInput.exists())
             throw new RuntimeException("File di ingresso inesistente!");
+
+        // Prendiamo il nome del file output, salviamo ed apriamo anche questo.
         System.out.print("Nome file di uscita: ");
-        nomeFo = sc.nextLine();
-        fo = new File(nomeFo);
-        if (!verificaFile(fi))
+        nomeFOutput = scanner.nextLine();
+        fileOutput = new File(nomeFOutput);
+
+        // Gestiamo le eccezioni.
+        if (!verificaFile(fileInput))
             throw new RuntimeException("File di ingresso non corretto");
-        caricaFile(fi);
-        visualizzaIndice();
-        scriviIndice(fo);
+
+        // Carichiamo i dati nella struttura che abbiamo creato.
+        caricaFile(fileInput);
+        // Stampiamo la struttura a schermo.
+        stampaIndice();
+        // Salviamo la nostra struttura dati scrivendola nel file output.
+        scriviIndice(fileOutput);
     }//main
 
 }//RiferimentiIncrociati

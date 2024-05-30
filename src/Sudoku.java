@@ -6,11 +6,11 @@ public class Sudoku {
     private int numSol = 0;
 
     // Costruttore con stato iniziale.
-    public Sudoku(int[][] board) {
+    public Sudoku(int[][] initialBoard) {
 
-        for (int i = 0; i < board.length; ++i) {
+        for (int i = 0; i < initialBoard.length; ++i) {
             // Recuperiamo la tripletta.
-            int riga = board[i][0], colonna = board[i][1], valore = board[i][2];
+            int riga = initialBoard[i][0], colonna = initialBoard[i][1], valore = initialBoard[i][2];
 
             // Controlliamo che i valori siano validi
             if (riga < 0 || riga >= 9 || colonna < 0 || colonna >= 9 || valore < 1 || valore > 9)
@@ -141,6 +141,7 @@ public class Sudoku {
                 {7, 1, 6}, {7, 2, 9}, {7, 4, 7}, {7, 6, 8}, {7, 7, 3},
                 {8, 3, 5}
         };
+
         Sudoku su = new Sudoku(b);
         System.out.println(su);
         System.out.println();
