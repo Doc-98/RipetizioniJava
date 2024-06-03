@@ -13,8 +13,11 @@ Prima Lezione -> classe da tema d'esame: Espressione
 Seconda Lezione -> package di classi da tema d'esame: PetriNet, classe PN lasciata allo studio per casa.
 ***
 ### Giovedì 30 Maggio - [ 14:30 | 15:30 ] - 1h
-Terza Lezione -> classe da tema d'esame: Sudoku
+Terza Lezione -> classe da tema d'esame: Sudoku (inziata), discorso su strutture dati
 ***
-Ore Pagate | Ore Svolte
-:-:|:-:
-5 | 4
+### Lunedì 3 Giugno - [ 10:30 | 12:30 ] - 2h
+Quarta Lezione -> classi da tema d'esame: Sudoku (finita), RiferimentiIncrociati (iniziata), discorso su TreeMap, Tree Set e astrazione in Java.
+***
+| Ore Pagate | Ore Svolte |
+|:----------:|:----------:|
+|     5      |     6      |

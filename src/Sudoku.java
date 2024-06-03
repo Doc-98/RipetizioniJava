@@ -36,7 +36,9 @@ public class Sudoku {
     // N.B: Nel nostro esercizio "colloca" viene chiamata solo da "risolvi" o da se stessa.
     // In questo modo inizia sempre dal punto (0, 0). Tuttavia teniamo a mente che il metodo funziona su qualsiasi sotto griglia che gli viene passata.
     private void colloca(int riga, int colonna) {
+
         if (this.blocked[riga][colonna]) {
+
             if (riga == this.board.length - 1 && colonna == this.board[riga].length - 1)
                 scriviSoluzione();
             else {
@@ -44,9 +46,13 @@ public class Sudoku {
                 else colloca(riga, colonna + 1);
             }
         } else {
+
             for (int s = 1; s <= 9; ++s) {
+
                 if (assegnabile(riga, colonna, s)) {
+
                     assegna(riga, colonna, s);
+
                     if (riga == this.board.length - 1 && colonna == this.board[riga].length - 1)
                         scriviSoluzione();
                     else {
@@ -78,6 +84,7 @@ public class Sudoku {
         // Verifica unicità stessa colonna
         for (int cursoreRiga = 0; cursoreRiga < 9; ++cursoreRiga)
             if (this.board[cursoreRiga][j] == valore) return false;
+
         return true;
     }//assegnabile
 
@@ -88,7 +95,7 @@ public class Sudoku {
 
     // Riceve due coordinate, azzera il valore della griglia nella data coordinata.
     private void deassegna(int i, int j) {
-        //cella certamente non bloccata
+        // Abbiamo precedenetemente verificato che la cella certamente non è bloccata
         this.board[i][j] = 0;
     }//deassegna
 
@@ -96,11 +103,9 @@ public class Sudoku {
     private void scriviSoluzione() {
         this.numSol++;
         System.out.println("SolNum#" + this.numSol + ": ");
-        for (int i = 0; i < 9; ++i) {
-            for (int j = 0; j < 9; ++j)
-                System.out.print(this.board[i][j] + "  ");
-            System.out.println();
-        }
+
+        System.out.println(this);
+
     }//scriviSoluzione
 
     // TO STRING

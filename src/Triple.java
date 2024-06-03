@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 public class Triple extends Backtracking<Integer,Integer>{
+
     private int[] arrayDiNumeri, triplettaDiControllo;
     private int valoreSomma, numSol = 0;
     private List<Set<Integer>> soluzioni = new ArrayList<>();
