@@ -42,6 +42,8 @@ Quinta Lezione:
 -> Classi da tema d'esame: RiferimentiIncrociati (finita)
 
 -> Ripasso su TreeMap e Tree Set, osservazioni sui vantaggi di una corretta formulazione di strutture dati.
+
+-> [Esempio appunti su strutture di codice generali]([url](https://strong-lumber-cb0.notion.site/Ripetizioni-Java-Angela-415f5b0aa0204007bcec5f3c62f71091?pvs=4))
 ***
 ### Conteggio Ore
 | Ore Pagate | Ore Svolte |
