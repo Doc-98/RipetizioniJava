@@ -26,14 +26,17 @@ public class RiferimentiIncrociati {
     // "parola":"numero"
     // Ritorna falso altrimenti.
     static boolean verificaFile(File f) throws IOException {
+
         String regex = "\\w+:\\d+";
+
         BufferedReader reader = new BufferedReader(new FileReader(f));
-        String linea = null;
+        String cursoreLinea = null;
+
         try {
             for ( ; ; ) {
-                linea = reader.readLine();
-                if (linea == null) break;
-                if (!linea.matches(regex)) return false;
+                cursoreLinea = reader.readLine();
+                if (cursoreLinea == null) break;
+                if (!cursoreLinea.matches(regex)) return false;
             }
         } finally {
             reader.close();
@@ -86,7 +89,7 @@ public class RiferimentiIncrociati {
         }
     }
 
-    // Prendi un file in input e ci scrive dentro la nostra struttura dati.
+    // Prendi un file in input e ci scrive dentro la nostra struttura dati in forma testuale.
     static void scriviIndice(File fo) throws IOException {
         PrintWriter printWriter = new PrintWriter(new FileWriter(fo));
         for (String cursoreParola : indice.keySet()) {
