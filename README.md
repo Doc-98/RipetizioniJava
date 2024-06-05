@@ -3,6 +3,52 @@
   
 <p align="right"> per: <i>Angela M.</i> </p>
 
+<table>
+  <tr>
+    <th align="center">
+      <img width="441" height="1">
+        <p> 
+          <small>
+            LINK UTILI
+          </small>
+        </p>
+    </th>
+    <th align="center">
+      <img width="441" height="1">
+        <p> 
+          <small>
+            CONTEGGIO ORE
+          </small>
+        </p>
+    </th>
+  </tr>
+  <tr>
+    <td align="center">
+      <a href="https://strong-lumber-cb0.notion.site/Ripetizioni-Java-Angela-415f5b0aa0204007bcec5f3c62f71091?pvs=4">Collegamento Appunti Notion</a>
+    </td>
+    <td align="center">
+      <table>
+        <tr>
+          <th align="center">
+            Ore Pagate
+          <th align="center">
+            Ore Svolte
+          </th>
+          </tr>
+          <tr>
+          <td align="center">
+            5
+          </td>
+          <td align="center">
+            7
+          </td>
+          </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+## Timeline
 ### Venerdì 17 Maggio - [ 10:00 | 12:00 ] - ~2h
 Lezione Introduttiva Gratuita:
 
@@ -42,10 +88,4 @@ Quinta Lezione:
 -> Classi da tema d'esame: RiferimentiIncrociati (finita)
 
 -> Ripasso su TreeMap e Tree Set, osservazioni sui vantaggi di una corretta formulazione di strutture dati.
-
--> [Esempio appunti su strutture di codice generali]([url](https://strong-lumber-cb0.notion.site/Ripetizioni-Java-Angela-415f5b0aa0204007bcec5f3c62f71091?pvs=4))
 ***
-### Conteggio Ore
-| Ore Pagate | Ore Svolte |
-|:----------:|:----------:|
-|     5      |     7      |
