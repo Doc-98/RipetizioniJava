@@ -7,7 +7,7 @@ public class Labirinto {
     private int[][] mappa;
     private boolean trovataSoluzione = false;
 
-    // Riceve un file e ritorna true se il file è valido se e riesce a caricarlo correttamente. False altrimenti.
+    // Riceve un file e ritorna true se il file è valido e se riesce a caricarlo correttamente. False altrimenti.
     public boolean caricaFile(File f) throws IOException {
 
         // Verifica esistenza.
@@ -45,16 +45,18 @@ public class Labirinto {
                 // Prendiamo un numero.
                 int cursor = Integer.parseInt(tokenizer.nextToken());
                 // Se non è valido ritorniamo false.
+                // Numero porta negativo || (numero porta fuori rage && diverso da 9999) || numero porta uguale a stanza attuale.
                 if (cursor < 0 || cursor > mappa.length && cursor != 9999 || cursor == num) return false;
                 // Salviamo il numero nella posizione corretta.
                 mappa[num][i] = cursor;
             }
-        }
+        } // scorrimento file
+
         // Se abbiamo letto un numero di linee uguale al numero di righe della mappa, ritorniamo true. False altrimenti.
         return cont == mappa.length - 1;
     }
 
-    // Prende un numero che rappresenta il punto di partenza e ritorna true se esiste una soluzione.
+    // Prende un numero che rappresenta il punto di partenza e ritorna true se esiste una soluzione. False altrimenti.
     public boolean risolvi(int start) {
         // Impostiamo l'attributo booleano a false.
         this.trovataSoluzione = false;
@@ -69,10 +71,10 @@ public class Labirinto {
     }
 
     // Riceve un intero che rappresenta la stanza che deve guardare e la lista con il percorso attuale.
-    private void trovaPercorso(int stanza, LinkedList<Integer> percorso) {
+    private void trovaPercorso(int numeroStanza, LinkedList<Integer> percorso) {
         // Legge tutti i valori della mappa sulla riga "stanza".
-        for (int i : mappa[stanza]) {
-            // Saltiamo il valore stanza nella prima posizione e i valori delle stanze che sono già state considerate.
+        for (int i : mappa[numeroStanza]) {
+            // Saltiamo i valori muri e i valori delle stanze che sono già state considerate.
             if (i != 0 && !percorso.contains(i)) {
                 // Aggiungiamo il numero alla lista.
                 percorso.addLast(i);
@@ -85,8 +87,8 @@ public class Labirinto {
                     trovaPercorso(i, percorso);
                 // Tornando indietro da una chiamata ricorsiva vuol dire che dobbiamo cambiare direzione.
                 percorso.removeLast();
-            }
-        }
+            }//if
+        } //for
     }
 
     public static void main(String... args) throws IOException {
