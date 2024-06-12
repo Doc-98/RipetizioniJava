@@ -1,4 +1,4 @@
-package Insieme;
+package Insieme.Astratto;
 
 import java.util.*;
 
@@ -112,4 +112,4 @@ public abstract class InsiemeAstratto<T> implements Insieme<T> {
         for (T cursor : this) h = h * M + cursor.hashCode();
         return h;
     }//hashCode
-}//Insieme.InsiemeAstratto
+}//Insieme.Astratto.InsiemeAstratto

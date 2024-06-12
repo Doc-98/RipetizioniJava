@@ -1,4 +1,4 @@
-package Insieme;
+package Insieme.Astratto;
 
 public interface Insieme<T> extends Iterable<T>{
     int size();

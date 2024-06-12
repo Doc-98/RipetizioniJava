@@ -1,4 +1,4 @@
-package Insieme;
+package Insieme.Astratto;
 
 public interface InsiemeOrdinato<T> extends Insieme<T> {
 

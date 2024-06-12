@@ -1,4 +1,4 @@
-package Insieme;
+package Insieme.Astratto;
 
 import java.util.*;
 
