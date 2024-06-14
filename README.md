@@ -40,7 +40,7 @@
             5
           </td>
           <td align="center">
-            9
+            10
           </td>
           </tr>
       </table>
@@ -95,6 +95,11 @@ Sesta Lezione:
 -> Classi da tema d'esame: Labirinto.
 ***
 ### Lunedì 10 Giugno - [ 10:00 | 11:00 ] - 1h
+Settima Lezione:
+
+-> Classi da tema d'esame: package Insieme.
+***
+### Venerdì 14 Giugno - [ 9:00 | 10:00 ] - 1h
 Settima Lezione:
 
 -> Classi da tema d'esame: package Insieme.

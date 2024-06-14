@@ -50,7 +50,9 @@ public class ConteggioMap extends ConteggioAstratto {
             int v = voti(cand);
             if (v < min) min = v;
         }
+        
         LinkedList<String> minori = new LinkedList<String>();
+        
         for (String cand : this) {
             int v = voti(cand);
             if (v == min) minori.add(cand);

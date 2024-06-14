@@ -11,7 +11,7 @@ public abstract class ConteggioAstratto implements Conteggio {
     // Scorre le stringhe contenute nell'oggetto, ritorna true se la stringa argomento è presente, false altrimenti.
     public boolean contieneCandidato(String cand) {
         for (String cnd : this)
-            if (cnd.equals(cand)) return true;
+            if(cnd.equals(cand)) return true;
         return false;
     }//contieneCandidato
 
