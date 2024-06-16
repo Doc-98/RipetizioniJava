@@ -20,6 +20,10 @@ public class Scheda implements Iterable<String> {
     public void remove(String cand) {
         preferenze.remove(cand);
     }//remove
+    
+    public int size() {
+        return preferenze.size();
+    }
 
     // EQUALS
     public boolean equals(Object x) {

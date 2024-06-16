@@ -56,14 +56,14 @@ public class Scrutinio {
             if (linea == null) break;
 
             // Se la linea è vuota, la scheda è bianca.
-            if (linea.length() == 0) {
+            if (linea.isEmpty()) {
                 sit.setSchedeBianche(sit.getSchedeBianche() + 1); // ? (N.B.: invece che questo metodo brutto, potevamo creare un metodo che aumentasse le schede bianche di 1)
                 // Passiamo al prossimo giro del ciclo, poichè non abbiamo nulla da leggere.
                 continue;
             }
 
             // Inizializziamo il tokenizer, creiamo una scheda e dichiariamo un booleano e un intero di controllo.
-            tokenizer = new StringTokenizer(linea, " ");
+            tokenizer = new StringTokenizer(linea);
             Scheda scheda = new Scheda();
             boolean schedaValida = true;
             int pref = 0;
@@ -71,11 +71,11 @@ public class Scrutinio {
             // Finchè ci sono ancora token...
             while (tokenizer.hasMoreTokens()) {
                 // Portiamo in maiuscolo e salviamo in una stringa, poi aggiorniamo il contatore.
-                String cand = tokenizer.nextToken().toUpperCase();
+                String cursoreCand = tokenizer.nextToken().toUpperCase();
                 pref++;
 
                 // Se il candidato che abbiamo appena letto non esiste, la scheda è nulla, quindi non valida.
-                if (!dc.contieneCandidato(cand)) {
+                if (!dc.contieneCandidato(cursoreCand)) {
 
                     sit.setSchedeNulle(sit.getSchedeNulle() + 1);
                     schedaValida = false;
@@ -83,12 +83,12 @@ public class Scrutinio {
                     // Usciamo dal while, poichè non ha più senso leggere questa linea.
                     break;
 
-                } else scheda.add(cand); // Se il candidato invece esiste, lo aggiungiamo alla scheda.
+                } else scheda.add(cursoreCand); // Se il candidato invece esiste, lo aggiungiamo alla scheda.
             }//while
 
             // ! N.B.: Modo terribile di computare la cosa. Segue metodo corretto.
             // Se la scheda è valida ma il numero delle preferenze è diverso dal numero dei candidati, la scheda è nulla.
-            if (schedaValida && pref != dc.getNumeroCandidati()) {
+            if (schedaValida && scheda.size() != dc.getNumeroCandidati()) {
                 sit.setSchedeNulle(sit.getSchedeNulle() + 1);
                 schedaValida = false;
             }
@@ -97,9 +97,11 @@ public class Scrutinio {
                 sit.setSchedeValide(sit.getSchedeValide() + 1);
                 elez.addScheda(scheda);
             }
-
+            // ! ---------------------------------------------------------------------------
+            // ! ---------------------------------------------------------------------------
+            
 // *           Formulazione corretta:
-// *           if(schedaValida && pref == dc.getNumeroCandidati()){
+// *           if(schedaValida && scheda.size() == dc.getNumeroCandidati()){
 // *               sit.setSchedeValide(sit.getSchedeValide() + 1);
 // *               elez.addScheda(scheda);
 // *           } else {

@@ -102,5 +102,16 @@ Settima Lezione:
 ### Venerdì 14 Giugno - [ 9:00 | 10:00 ] - 1h
 Settima Lezione:
 
--> Classi da tema d'esame: package Insieme.
+-> Classi da tema d'esame: package Elezioni (iniziato).
+
+-> Ripasso concetti di astrazione.
+***
+### Domenica 16 Giugno - [ 10:00 | 11:00 ] - 1h
+Ottava Lezione:
+
+-> Classi da tema d'esame: package Elezioni (finito).
+
+-> Ripasso concetti base: astrazione, object-oriented thinking.
+
+-> Visione di ulteriore esempio di gestione file da progetto personale.
 ***
