@@ -52,9 +52,9 @@
 ### Venerdì 17 Maggio - [ 10:00 | 12:00 ] - ~2h
 Lezione Introduttiva Gratuita:
 
--> Classe dal workspace: Backtracking.
+-> Classe dal workspace: Backtracking.Backtracking.
 
--> Classe da tema d'esame: Triple.
+-> Classe da tema d'esame: Backtracking.Triple.
 ***
 ### Giovedì 23 Maggio - [ 14:30 | 15:30 ] - 1h
 Prima Lezione:

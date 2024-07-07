@@ -1,3 +1,5 @@
+package Backtracking;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -102,4 +104,4 @@ public abstract class Backtracking<P,S> {
         tentativo( primoPuntoDiScelta() );
     }//risolvi
 
-}//Backtracking
+}//Backtracking.Backtracking

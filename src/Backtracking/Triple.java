@@ -1,3 +1,5 @@
+package Backtracking;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -44,7 +46,7 @@ public class Triple extends Backtracking<Integer,Integer>{
 
     // Costruiamo anche una collezione nella quale inseriamo tutti gli elementi dell'arrayDiNumeri.
     protected Collection<Integer> creaCollezioneElementi(Integer elem){
-        List<Integer> s=new ArrayList<>();
+        List<Integer> s = new ArrayList<>();
         for (int j : arrayDiNumeri) s.add(j);
         return s;
     }
@@ -105,12 +107,13 @@ public class Triple extends Backtracking<Integer,Integer>{
     }
 
     // Metodo per verificare di aver trovato una soluzione valida e non ripetuta.
-    protected boolean esisteSoluzione( Integer cursoreListaScelti) {
+    @SuppressWarnings("DuplicatedCode")
+    protected boolean esisteSoluzione(Integer cursoreListaScelti) {
         // Verifichiamo che il cursore sia sull'ultimo elemento dell'array dove teniamo le possibili soluzioni.
         if( cursoreListaScelti < triplettaDiControllo.length-1 ) return false;
 
         // Creiamo un nuovo set per verificare di non aver trovato una soluzione duplicata.
-        Set<Integer> sol = new HashSet<Integer>();
+        Set<Integer> sol = new HashSet<>();
 
         // Ci mettiamo dentro tutti gli elementi dell'array di controllo.
         // Chiaramente essendo un set, qualsiasi tentativo di aggiungere un duplicato verrà ignorato.
@@ -123,7 +126,7 @@ public class Triple extends Backtracking<Integer,Integer>{
         // A questo punto filtriamo lo stream di "soluzioni" e contiamo se troviamo match con "sol".
         // Questo perchè al momento abbiamo una soluzione valida dal punto di vista della somma dei suoi numeri.
         // Ma dobbiamo anche capire se l'abbiamo già considerata, confrontandola con tutte le soluzioni precedentemente considerate.
-        int c = (int)controlStream.filter(s -> s.equals(sol)).count();
+        int count = (int)controlStream.filter(s -> s.equals(sol)).count();
 
         // Qui la soluzione viene memorizzata a prescindere che ci sia già un doppione o meno.
         // Si potrebbe ottimizzare, ma effettivamente l'efficacia del codice rimane intatta.
@@ -131,7 +134,7 @@ public class Triple extends Backtracking<Integer,Integer>{
 
         // A questo punto se "c" è ancora uguale a 0, vuol dire che la soluzione che stiamo considerando non ha duplicati fra quelle già trovate.
         // Quindi ritorniamo c == 0 poiché se lo è abbiamo effettivamente trovato una nuova soluzione, altrimenti dobbiamo ritornare false.
-        return c == 0;
+        return count == 0;
     }
 
     public static void main(String[] args) {
