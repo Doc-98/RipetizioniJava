@@ -8,7 +8,7 @@ import java.util.*;
 
 public class Sequenze extends Backtracking<Integer, Integer> {
     
-    private final int num, controlSum;
+    private final int n, controlSum;
     private File output;
     private int[] controlArray;
     private Set<SortedSet<Integer>> soluzioni = new HashSet<>();
@@ -17,10 +17,10 @@ public class Sequenze extends Backtracking<Integer, Integer> {
         
         if(n < 3) throw new IllegalArgumentException();
         
-        this.num = n;
-        this.controlSum = num*(num*num + 1)/2;
+        this.n = n;
+        this.controlSum = this.n *(this.n * this.n + 1)/2;
         this.output = f;
-        this.controlArray = new int[this.num];
+        this.controlArray = new int[this.n];
         
     }
     
@@ -36,6 +36,7 @@ public class Sequenze extends Backtracking<Integer, Integer> {
             somma += this.controlArray[i];
         }
         
+        // Se non abbiamo ancora finito di riempire il controlArray && l'attuale somma dei valori, più l'elemento che vogliamo aggiungere non sfora la controlSum
         if(cursoreListaScelti < this.controlArray.length - 1 && somma + elem < this.controlSum) return true;
         
         if(cursoreListaScelti == this.controlArray.length - 1 && somma + elem == this.controlSum) return true;
@@ -112,7 +113,7 @@ public class Sequenze extends Backtracking<Integer, Integer> {
         
         List<Integer> elementi = new ArrayList<>();
         
-        for(int i = 1; i <= num*num; i++) {
+        for(int i = 1; i <= n * n; i++) {
             elementi.add(i);
         }
         

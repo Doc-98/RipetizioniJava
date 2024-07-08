@@ -11,6 +11,19 @@ public abstract class Backtracking_OLD<P, S> {
     protected abstract void deassegna( P ps, S s );
     protected abstract void scriviSoluzione( P p );
     
+    protected boolean esisteSoluzione( P p ) {
+        return false;
+    }//esisteSoluzione
+    
+    protected boolean ultimaSoluzione( P p ) {
+        return false; //cerca tutte le possibili soluzioni
+    }//ultimaSoluzione
+    
+    //factory
+    protected abstract List<P> puntiDiScelta();
+    protected abstract Collection<S> scelte(P p );
+    
+    
     private P primoPuntoDiScelta() {
         return ps.get(0);
     }//primoPuntoDiScelta
@@ -27,19 +40,7 @@ public abstract class Backtracking_OLD<P, S> {
         return i==ps.size()-1;
     }
     
-    protected boolean esisteSoluzione( P p ) {
-        return false;
-    }//esisteSoluzione
-    
-    protected boolean ultimaSoluzione( P p ) {
-        return false; //cerca tutte le possibili soluzioni
-    }//ultimaSoluzione
-    
     private List<P> ps;
-    
-    //factory
-    protected abstract List<P> puntiDiScelta();
-    protected abstract Collection<S> scelte(P p );
     
     protected void tentativo( P p ) {
         Collection<S> sa=scelte(p); //scelte ammissibili per p

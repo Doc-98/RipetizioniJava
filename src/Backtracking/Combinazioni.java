@@ -6,7 +6,7 @@ public class Combinazioni extends Backtracking<Integer, Integer>{
     
     private final int n;
     private int[] controlArray;
-    private List<SortedSet<Integer>> soluzioni = new ArrayList<>();
+    private List<Set<Integer>> soluzioni = new ArrayList<>();
     
     // Costruttore.
     public Combinazioni(int n, int k) {
@@ -41,7 +41,7 @@ public class Combinazioni extends Backtracking<Integer, Integer>{
         
         if( cursoreListaScelti < controlArray.length-1 ) return false;
         
-        SortedSet<Integer> sol = new TreeSet<>();
+        Set<Integer> sol = new HashSet<>();
         
         for( int value : controlArray) sol.add(value);
         
@@ -62,7 +62,7 @@ public class Combinazioni extends Backtracking<Integer, Integer>{
     @Override
     protected List<Integer> costruisciListaPuntiScelta() {
         
-        List<Integer> listaPuntiScelta = new ArrayList<Integer>();
+        List<Integer> listaPuntiScelta = new ArrayList<>();
         
         for(int i = 0; i < controlArray.length; i++) {
             listaPuntiScelta.add(i);
@@ -75,7 +75,7 @@ public class Combinazioni extends Backtracking<Integer, Integer>{
     @Override
     protected Collection<Integer> creaCollezioneElementi(Integer elem) {
         
-        List<Integer> elementi = new ArrayList<Integer>();
+        List<Integer> elementi = new ArrayList<>();
         
         for(int i = 1; i <= this.n; i++) {
             elementi.add(i);
