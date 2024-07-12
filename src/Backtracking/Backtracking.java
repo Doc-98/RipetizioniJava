@@ -13,7 +13,7 @@ public abstract class Backtracking<P,S> {
     protected abstract void assegna(P cursoreListaScelti, S elemDaAssegnare);
 
     // Metodo da definire nella classe figlia per rimuovere l'assegnamento di due elementi.
-    protected abstract void deassegna(P elemControllo, S elem);
+    protected abstract void deassegna(P cursore, S elem);
 
     // Metodo da definire nella classe figlia per definire la stampa dei risultati.
     protected abstract void scriviSoluzione(P elemControllo);
